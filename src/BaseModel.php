@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
+use Illuminate\Database\Eloquent\Concerns\HidesAttributes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tinderbox\ClickhouseBuilder\Query\Enums\Operator;
@@ -18,6 +19,7 @@ use Tinderbox\ClickhouseBuilder\Query\TwoElementsLogicExpression;
 class BaseModel
 {
     use HasAttributes;
+    use HidesAttributes;
     use HasEvents;
 
     /**
