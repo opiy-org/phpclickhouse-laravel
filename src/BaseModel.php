@@ -7,7 +7,9 @@ namespace PhpClickHouseLaravel;
 use ClickHouseDB\Client;
 use ClickHouseDB\Statement;
 use Exception;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Concerns\HasAttributes;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tinderbox\ClickhouseBuilder\Query\Enums\Operator;
@@ -16,6 +18,7 @@ use Tinderbox\ClickhouseBuilder\Query\TwoElementsLogicExpression;
 class BaseModel
 {
     use HasAttributes;
+    use HasEvents;
 
     /**
      * The table associated with the model.
@@ -45,6 +48,13 @@ class BaseModel
      * @var bool
      */
     public $exists = false;
+
+    /**
+     * The event dispatcher instance.
+     *
+     * @var Dispatcher
+     */
+    protected static $dispatcher;
 
     /**
      * Get the table associated with the model.
@@ -105,7 +115,11 @@ class BaseModel
     public static function create(array $attributes = [])
     {
         $model = static::make($attributes);
-        $model->save();
+        $model->fireModelEvent('creating', false);
+
+        if ($model->save()) {
+            $model->fireModelEvent('created', false);
+        }
 
         return $model;
     }
@@ -136,6 +150,8 @@ class BaseModel
             throw new Exception("Clickhouse does not allow update rows");
         }
         $this->exists = !static::insertAssoc([$this->getAttributes()])->isError();
+
+        $this->fireModelEvent('saved', false);
 
         return $this->exists;
     }

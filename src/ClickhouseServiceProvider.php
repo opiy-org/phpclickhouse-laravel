@@ -24,5 +24,7 @@ class ClickhouseServiceProvider extends ServiceProvider
 
             return Connection::createWithClient($config);
         });
+
+        BaseModel::setEventDispatcher($this->app['events']);
     }
 }
