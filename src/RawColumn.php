@@ -5,9 +5,17 @@ declare(strict_types=1);
 namespace PhpClickHouseLaravel;
 
 use Tinderbox\ClickhouseBuilder\Query\Expression;
+use Tinderbox\ClickhouseBuilder\Query\Identifier;
 
 class RawColumn extends Expression
 {
+    /**
+     * Column alias.
+     *
+     * @var Identifier|null
+     */
+    private $alias = null;
+
     /**
      * Create a new raw query expression.
      *
@@ -21,6 +29,20 @@ class RawColumn extends Expression
             $this->value .= " AS `$alias`";
         }
 
+        if ($alias) {
+            $this->alias = new Identifier($alias);
+        }
+
         parent::__construct($value);
+    }
+
+    /**
+     * Get column alias.
+     *
+     * @return Identifier|null
+     */
+    public function getAlias(): ?Identifier
+    {
+        return $this->alias;
     }
 }
