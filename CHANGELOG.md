@@ -1,3 +1,6 @@
+## 1.15 [2022-03-24]
+1. Add method to get column alias
+
 ## 1.14 [2022-03-24]
 1. Add simple events
 
