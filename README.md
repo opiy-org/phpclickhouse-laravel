@@ -5,6 +5,8 @@ Adapter to Laravel and Lumen of the most popular libraries:
 - https://github.com/smi2/phpClickHouse - for connections and perform queries
 - https://github.com/the-tinderbox/ClickhouseBuilder - good query builder
 
+Based on https://github.com/glushkovds/phpclickhouse-laravel
+
 ## Features
 
 No dependency, only Curl (support php >=7.1 )
@@ -22,7 +24,7 @@ More: https://github.com/smi2/phpClickHouse#features
 **1.**  Install via composer
 
 ```sh
-$ composer require glushkovds/phpclickhouse-laravel
+$ composer require opiy-org/phpclickhouse-laravel
 ```
 
 **2.** Add new connection into your config/database.php:

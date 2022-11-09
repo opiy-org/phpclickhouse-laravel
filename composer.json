@@ -1,12 +1,12 @@
 {
-  "name": "glushkovds/phpclickhouse-laravel",
+  "name": "opiy-org/phpclickhouse-laravel",
   "description": "Adapter of the most popular library https://github.com/smi2/phpClickHouse to Laravel",
   "keywords": [
     "php",
     "laravel",
     "clickhouse"
   ],
-  "homepage": "https://github.com/glushkovds/phpClickHouse-laravel",
+  "homepage": "https://github.com/opiy-org/phpClickHouse-laravel",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -14,6 +14,10 @@
       "name": "Denis Glushkov",
       "email": "amkarovec@gmail.com",
       "homepage": "https://github.com/glushkovds"
+    },
+    {
+      "name": "opiy",
+      "homepage": "https://github.com/opiy-org"
     }
   ],
   "require": {
