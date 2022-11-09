@@ -33,7 +33,7 @@ class RawColumn extends Expression
             $this->alias = new Identifier($alias);
         }
 
-        parent::__construct($value);
+        parent::__construct($this->value);
     }
 
     /**

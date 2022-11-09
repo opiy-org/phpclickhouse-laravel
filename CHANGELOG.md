@@ -1,3 +1,6 @@
+## 1.15.2 [2022-11-09]
+1. fix column alias
+
 ## 1.15 [2022-03-24]
 1. Add method to get column alias
 
