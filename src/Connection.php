@@ -24,13 +24,13 @@ class Connection extends BaseConnection
      * @param array $config
      * @return static
      */
-    public static function createWithClient(array $config)
+    public static function createWithClient(array $config): self
     {
         $conn = new static(null, $config['database'], '', $config);
         $conn->client = new Client($config);
         $conn->client->database($config['database']);
-        $conn->client->setTimeout($config['timeout_query']);
-        $conn->client->setConnectTimeOut($config['timeout_connect']);
+        $conn->client->setTimeout((int)$config['timeout_query']);
+        $conn->client->setConnectTimeOut((int)$config['timeout_connect']);
         if ($configSettings =& $config['settings']) {
             $settings = $conn->getClient()->settings();
             foreach ($configSettings as $sName => $sValue) {
@@ -47,19 +47,19 @@ class Connection extends BaseConnection
     }
 
     /** @inheritDoc */
-    protected function getDefaultQueryGrammar()
+    protected function getDefaultQueryGrammar(): QueryGrammar
     {
         return new QueryGrammar();
     }
 
     /** @inheritDoc */
-    protected function getDefaultSchemaGrammar()
+    protected function getDefaultSchemaGrammar(): SchemaGrammar
     {
         return new SchemaGrammar();
     }
 
     /** @inheritDoc */
-    public function getSchemaBuilder()
+    public function getSchemaBuilder(): SchemaBuilder
     {
         if (is_null($this->schemaGrammar)) {
             $this->useDefaultSchemaGrammar();

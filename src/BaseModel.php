@@ -100,7 +100,7 @@ class BaseModel
      * @param array $attributes
      * @return static
      */
-    public static function make(array $attributes = [])
+    public static function make(array $attributes = []): self
     {
         $model = new static;
         $model->fill($attributes);
@@ -114,7 +114,7 @@ class BaseModel
      * @return static
      * @throws Exception
      */
-    public static function create(array $attributes = [])
+    public static function create(array $attributes = []): self
     {
         $model = static::make($attributes);
         $model->fireModelEvent('creating', false);
@@ -248,10 +248,10 @@ class BaseModel
     }
 
     /**
-     * @param array $select optional = ['*']
+     * @param string|array|RawColumn $select optional = ['*']
      * @return Builder
      */
-    public static function select(array $select = ['*']): Builder
+    public static function select($select = ['*']): Builder
     {
         return (new Builder(static::getClient()))->select($select)->from((new static())->getTable());
     }
@@ -325,6 +325,11 @@ class BaseModel
         }
 
         return static::getClient()->write($sql);
+    }
+
+    public static function truncate(): Statement
+    {
+        return static::getClient()->write('TRUNCATE TABLE ' . (new static())->getTableSources());
     }
 
     /**
