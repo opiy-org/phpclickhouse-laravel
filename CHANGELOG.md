@@ -1,3 +1,6 @@
+## 1.15.4 [2022-11-09]
+1. get updates from origin (glushkovds/phpclickhouse-laravel)
+
 ## 1.15.3 [2022-11-09]
 1. fix column alias
 
